@@ -21,8 +21,8 @@ public class ImprimirNoConsoleServlet extends HttpServlet {
 
     private static final long serialVersionUID = -5912094867653361412L;
     
-    @Resource
-    private ManagedExecutorService executorService;
+//    @Resource
+//    private ManagedExecutorService executorService;
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -36,9 +36,24 @@ public class ImprimirNoConsoleServlet extends HttpServlet {
         String texto = req.getParameter("texto");
         Integer vezes = Integer.parseInt( req.getParameter("vezes") );
         ImprimirNoConsoleRunnable dizMeuNome = new ImprimirNoConsoleRunnable( texto ,  vezes );
-        executorService.submit( dizMeuNome );
+        executor.submit( dizMeuNome );
+        iniciaThread();
         
         req.getRequestDispatcher("/index.jsp").forward(req,resp);
+    }
+    
+    @Resource(name = "DefaultManagedExecutorService")
+    private ManagedExecutorService executor;
+    
+    public void iniciaThread(){
+    	
+    	executor.submit( new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("Faz algo incrível!");
+			}
+		});
+    	
     }
     
 }

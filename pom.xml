@@ -4,7 +4,9 @@
 	<groupId>br.com.efraimgentil</groupId>
 	<artifactId>jsr236-concurrencyutilities</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	<packaging>war</packaging>
+	<name>jsr236-concurrencyutilities</name>
+	
 	<developers>
 		<developer>
 			<name>Efraim Gentil</name>
